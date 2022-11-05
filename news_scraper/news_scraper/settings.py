@@ -1,4 +1,4 @@
-# Scrapy settings for article_scraper project
+# Scrapy settings for news_scraper project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,19 +7,18 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'article_scraper'
+BOT_NAME = 'news_scraper'
+
+SPIDER_MODULES = ['news_scraper.spiders']
+NEWSPIDER_MODULE = 'news_scraper.spiders'
 
 CLOSESPIDER_PAGECOUNT=10
 
-FEED_URI='articles.csv'
-FEED_FORMAT='csv'
-
-SPIDER_MODULES = ['article_scraper.spiders']
-NEWSPIDER_MODULE = 'article_scraper.spiders'
-
+FEED_URI='news_articles.json'
+FEED_FORMAT='json'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'article_scraper (+http://www.yourdomain.com)'
+#USER_AGENT = 'news_scraper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -50,13 +49,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'article_scraper.middlewares.ArticleScraperSpiderMiddleware': 543,
+#    'news_scraper.middlewares.NewsScraperSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'article_scraper.middlewares.ArticleScraperDownloaderMiddleware': 543,
+#    'news_scraper.middlewares.NewsScraperDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -67,6 +66,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+#ITEM_PIPELINES = {
+#    'news_scraper.pipelines.NewsScraperPipeline': 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -80,11 +82,7 @@ ROBOTSTXT_OBEY = True
 #AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 #AUTOTHROTTLE_DEBUG = False
-ITEM_PIPELINES = {
-    'article_scraper.pipelines.CheckItemPipeline': 100,
-    'article_scraper.pipelines.CleanDatePipeline': 200,
 
-}
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 #HTTPCACHE_ENABLED = True
@@ -94,5 +92,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # Set settings whose default value is deprecated to a future-proof value
-#REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
-#TWISTED_REACTOR = 'twisted.internet.asyncioreactor.AsyncioSelectorReactor'
+REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
+TWISTED_REACTOR = 'twisted.internet.asyncioreactor.AsyncioSelectorReactor'

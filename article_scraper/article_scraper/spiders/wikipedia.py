@@ -13,10 +13,10 @@ class WikipediaSpider(CrawlSpider):
     ]
 
     custom_settings={
-        'FEED_URI': 'articles.xml',
+        'FEED_URI': 'articles2.xml',
         'FEED_FORMAT': 'xml'
     }
-    
+
     def parse_info(self, response):
         article = Article()
         article['title']= response.xpath('//h1/text()').get() or response.xpath('//h1/i/text()')
